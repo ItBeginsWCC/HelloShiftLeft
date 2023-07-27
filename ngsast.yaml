@@ -1,20 +1,36 @@
 ngsast:
-- app:
-    name: ShiftLeftHelloJava
-    language: JAVA # change to your app's language if necessary
-    modify-findings:
-      - Header Injection
-finding-modifications:
-  Header Injection:
-    filter:
-      category:
-        - Header Injection
-    tags:
-      - key: cvss_score
-        value: 2
-      # - key: severity
-      #   value: critical
-      # - key: cvss_31_severity_rating
-      #   value: high
-      # - key: reason
-      #   value: appsec_escalation
+  - app:
+      name: helloshShiftLeftHelloJavaiftleft
+      language: JAVA # change to your app's language
+      policy: io.shiftleft/helloshiftleft # change this policy name to the one you'd like to use for this app
+  - default:
+      policy: io.shiftleft/defaultWithDict
+additional-findings:
+  hsl-js-secrets:
+    name: secrets
+    entropy: 0.1
+    include:
+      - "**/*.properties"
+      - src/**
+    exclude:
+      - src/test/**
+# ngsast:
+# - app:
+#     name: ShiftLeftHelloJava
+#     language: JAVA # change to your app's language if necessary
+#     modify-findings:
+#       - Header Injection
+# finding-modifications:
+#   Header Injection:
+#     filter:
+#       category:
+#         - Header Injection
+#     tags:
+#       - key: cvss_score
+#         value: 2
+#       # - key: severity
+#       #   value: critical
+#       # - key: cvss_31_severity_rating
+#       #   value: high
+#       # - key: reason
+#       #   value: appsec_escalation
