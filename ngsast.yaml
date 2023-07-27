@@ -1,28 +1,20 @@
 ngsast:
-  - app:
-      name: ShiftLeftHelloJava
-      language: JAVA
-      policy: io.shiftleft/helloshiftleft
-  - default:
-      policy: io.shiftleft/defaultWithDict
+- app:
+    name: ShiftLeftHelloJava
+    language: JAVA # change to your app's language if necessary
+    modify-findings:
+      - open_redirect_modification_rule
 finding-modifications:
-  my_modification_rule:
+  open_redirect_modification_rule:
     filter:
       category:
-        - Sensitive Data Leak
-      id:
-        - 97
-      type:
-        - vuln
-      severity:
-        - info
-        - moderate
+        - Header Injection
     tags:
       - key: cvss_score
         value: 5
       - key: severity
-        value: moderate
+        value: Medium
       - key: cvss_31_severity_rating
-        value: medium
-      - key: some-custom-tag
-        value: todo
+        value: low
+      - key: reason
+        value: appsec_escalation
