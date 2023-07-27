@@ -3,9 +3,9 @@ ngsast:
     name: ShiftLeftHelloJava
     language: JAVA # change to your app's language if necessary
     modify-findings:
-      - open_redirect_modification_rule
+      - Header Injection
 finding-modifications:
-  open_redirect_modification_rule:
+  Header Injection:
     filter:
       category:
         - Header Injection
