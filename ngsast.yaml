@@ -1,11 +1,28 @@
 ngsast:
-- app:
-    name: helloshiftleft
-    additional-findings:
-    - hsl-secrets
-    policy: io.shiftleft/helloshiftleft
-    language: JAVA
-additional-findings:
-  hsl-secrets:
-    entropy: 0.5
-    name: secrets
+  - app:
+      name: ShiftLeftHelloJava
+      language: JAVA
+      policy: io.shiftleft/helloshiftleft
+  - default:
+      policy: io.shiftleft/defaultWithDict
+finding-modifications:
+  my_modification_rule:
+    filter:
+      category:
+        - Sensitive Data Leak
+      id:
+        - 97
+      type:
+        - vuln
+      severity:
+        - info
+        - moderate
+    tags:
+      - key: cvss_score
+        value: 5
+      - key: severity
+        value: critical
+      - key: cvss_31_severity_rating
+        value: high
+      - key: some-custom-tag
+        value: todo
