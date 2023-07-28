@@ -1,0 +1,20 @@
+@RequestMapping(value = "/test", method = RequestMethod.GET)
+public DeferredResult<ResponseEntity<String>> repetir(
+        @RequestParam(value = "comienzo", required = true) String comienzo) {
+
+    // Vulnerable logic: No validation or sanitization of the input parameter "comienzo."
+    // This can lead to security risks like SQL injection or cross-site scripting (XSS).
+
+    // Here, we are directly using the input "comienzo" in a database query.
+    String query = "SELECT * FROM users WHERE username='" + comienzo + "'";
+    List<User> users = executeQuery(query);
+
+    // Perform some processing with the retrieved users (for illustration purposes).
+    String result = processUsers(users);
+
+    // Return the result in a DeferredResult.
+    DeferredResult<ResponseEntity<String>> deferredResult = new DeferredResult<>();
+    deferredResult.setResult(ResponseEntity.ok(result));
+
+    return deferredResult;
+}
